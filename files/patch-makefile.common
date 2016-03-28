@@ -1,0 +1,20 @@
+--- makefile.common.orig	2016-01-18 21:51:27.110826000 +0100
++++ makefile.common	2016-01-18 21:52:32.389759000 +0100
+@@ -7,7 +7,7 @@
+ 
+ LIBDRIVEIO_SRC_PUB=libdriveio/src/srlist.cpp
+ 
+-LIBEBML_INC=-Ilibebml/inc
++LIBEBML_INC=-I/usr/local/include/ebml
+ 
+ LIBEBML_DEF=-DEBML_NO_READ -DEBML_STRICT_API -DEBML_DEBUG
+ 
+@@ -17,7 +17,7 @@
+   libebml/src/EbmlString.cpp libebml/src/EbmlSubHead.cpp libebml/src/EbmlUInteger.cpp libebml/src/EbmlUnicodeString.cpp \
+   libebml/src/EbmlVersion.cpp libebml/src/EbmlVoid.cpp libebml/src/IOCallback.cpp libebml/src/MemIOCallback.cpp 
+ 
+-LIBMATROSKA_INC=-Ilibmatroska/inc
++LIBMATROSKA_INC=-I/usr/local/include/matroska
+ 
+ LIBMATROSKA_SRC=libmatroska/src/FileKax.cpp libmatroska/src/KaxAttached.cpp libmatroska/src/KaxAttachments.cpp \
+   libmatroska/src/KaxBlock.cpp libmatroska/src/KaxBlockData.cpp libmatroska/src/KaxCluster.cpp libmatroska/src/KaxContexts.cpp \

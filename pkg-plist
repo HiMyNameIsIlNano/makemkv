@@ -1,0 +1,5 @@
+bin/makemkv
+lib/libdriveio.so
+lib/libdriveio.so.0
+lib/libmakemkv.so
+lib/libmakemkv.so.1
