@@ -1,6 +1,6 @@
 # New ports collection makefile for:	makemkv
 # Date created:				05 Mar 2012
-# Date Updated:				11 January 2016
+# Date Updated:				10 April 2016
 # Whom:					kappei84
 #
 # $FreeBSD$
@@ -12,12 +12,31 @@ CATEGORIES=	multimedia
 DISTNAME=	${PORTNAME}-oss-${PORTVERSION}${EXTRACT_SUFFIX}
 MASTER_SITES=	http://www.makemkv.com/download/
 
-LIB_DEPENDS=	libmatroska.so:${PORTSDIR}/multimedia/libmatroska
+# Prefix for the pkp-plist
+#PLIST_SUB=	DATADIR=${PREFIX}
 
-MAINTAINER=	osa@FreeBSD.org
+# Missing qt4/qt5 dependency check in case the port is built with --enable-gui
+BUILD_DEPENDS=	ffmpeg${FFMPEG_SUFX}:${PORTSDIR}/multimedia/ffmpeg${FFMPEG_SUFX}
+
+MAINTAINER=	
 COMMENT=	Make MKV from Blu-ray and DVD
 
-MAKEFILE=	Makefile.in
+GNU_CONFIGURE=	yes
+OPTIONS_DEFINE=	GUI
+
+.include <bsd.port.options.mk>
+
+.if ${PORT_OPTIONS:MGUI}
+CONFIGURE_ARGS+=	--enable-gui
+.else
+CONFIGURE_ARGS+=	--disable-gui
+.endif # GUI
+
+# flags for the configure script
+CPPFLAGS+=	-I${LOCALBASE}/include
+LIBS+=		-L${LOCALBASE}/lib
+
+MAKEFILE=	Makefile
 USES= gmake
 USE_OPENSSL=	yes
 USE_LDCONFIG=	yes
@@ -25,12 +44,15 @@ USE_QT_VER=	4
 QT_COMPONENTS=	qmake gui svg webkit xml moc uic rcc imageformats
 
 do-install:
+.if ${PORT_OPTIONS:MGUI}
 	${INSTALL_PROGRAM} ${WRKSRC}/out/${PORTNAME} ${PREFIX}/bin
-.for i in libdriveio.so.0 libmakemkv.so.1
+.endif
+.for i in libdriveio.so.0 libmakemkv.so.1 libmmbd.so.0
 	${INSTALL_PROGRAM} ${WRKSRC}/out/${i} ${PREFIX}/lib
 .endfor
 	@ cd ${PREFIX}/lib ; \
 	${LN} -sf libdriveio.so.0 libdriveio.so ; \
-	${LN} -sf libmakemkv.so.1 libmakemkv.so
+	${LN} -sf libmakemkv.so.1 libmakemkv.so ; \
+	${LN} -sf libmmbd.so.0 libmmbd.so
 
 .include <bsd.port.mk>

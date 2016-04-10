@@ -1,2 +1,0 @@
-#define BUILDINFO_ARCH_NAME "x86_64-unknown-freebsd10.2"
-#define BUILDINFO_BUILD_DATE "Mon Mar 21 22:28:47 CET 2016"

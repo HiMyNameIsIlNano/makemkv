@@ -1,0 +1,10 @@
+--- configure.orig	2016-04-06 13:10:16.382059000 +0200
++++ configure	2016-04-06 13:11:06.455310000 +0200
+@@ -2685,6 +2685,7 @@
+ fi
+ 
+ ENABLE_GUI=$enable_gui
++echo "printing value of variable ENABLE_GUI: " $ENABLE_GUI
+ 
+ 
+ # Check whether --enable-noec was given.
