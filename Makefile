@@ -15,9 +15,6 @@ MASTER_SITES=	http://www.makemkv.com/download/
 # Prefix for the pkp-plist
 #PLIST_SUB=	DATADIR=${PREFIX}
 
-# Missing qt4/qt5 dependency check in case the port is built with --enable-gui
-BUILD_DEPENDS=	ffmpeg${FFMPEG_SUFX}:${PORTSDIR}/multimedia/ffmpeg${FFMPEG_SUFX}
-
 MAINTAINER=	
 COMMENT=	Make MKV from Blu-ray and DVD
 
@@ -28,7 +25,9 @@ OPTIONS_DEFINE=	GUI
 
 .if ${PORT_OPTIONS:MGUI}
 CONFIGURE_ARGS+=	--enable-gui
-.else
+USE_QT_VER=	4
+QT_COMPONENTS=	qmake gui svg webkit xml moc uic rcc imageformats
+.else # qt4/qt5 dependency check in case the port is built with gui support
 CONFIGURE_ARGS+=	--disable-gui
 .endif # GUI
 
@@ -40,8 +39,6 @@ MAKEFILE=	Makefile
 USES= gmake
 USE_OPENSSL=	yes
 USE_LDCONFIG=	yes
-USE_QT_VER=	4
-QT_COMPONENTS=	qmake gui svg webkit xml moc uic rcc imageformats
 
 do-install:
 .if ${PORT_OPTIONS:MGUI}
