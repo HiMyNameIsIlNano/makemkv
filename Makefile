@@ -25,9 +25,9 @@ OPTIONS_DEFINE=	GUI
 
 .if ${PORT_OPTIONS:MGUI}
 CONFIGURE_ARGS+=	--enable-gui
-USE_QT_VER=	4
-QT_COMPONENTS=	qmake gui svg webkit xml moc uic rcc imageformats
-.else # qt4/qt5 dependency check in case the port is built with gui support
+USE_QT4=	qmake gui svg webkit xml moc uic rcc 
+USE_QT4+=	imageformats
+.else # qt4 dependency check in case the port is built with gui support
 CONFIGURE_ARGS+=	--disable-gui
 .endif # GUI
 
