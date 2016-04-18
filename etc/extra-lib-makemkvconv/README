@@ -1,0 +1,5 @@
+libcrypto -> /usr/lib
+libexpat -> /usr/lib
+libavcodec -> /usr/lib/i386-linux-gnu
+libavutil -> /usr/lib/i386-linux-gnu
+
